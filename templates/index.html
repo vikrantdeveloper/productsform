@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Assignment 2 - Cloud Computing ELL887</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Lora">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="static/css/styles.min.css">
+</head>
+<body>
+
+<div class="container">
+  
+  <div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+    <div class="container">
+      <a class="navbar-brand" href="#">Vikrant Thakur EEY227587</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navcol-1">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  </div><hr>
+  <br><br>
+
+  <!-- Product Form -->
+  <div class="row">
+    <div class="col-sm-4">
+
+
+    </div>
+    
+    <div class="col-sm-4">
+      <h4>Products Database Entry Form</h4>
+      <p>The form below will store the product details in your AWS RDS MySQL database.</p>
+      <form action="/jinsert" method="POST">
+      <div class="form-group">
+          <label for="id">Product ID:</label>
+          <input name="id" type="text" class="form-control" id="id" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <input name="description" type="text" class="form-control" id="description" required>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input name="price" type="number" class="form-control" id="price" required>
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-success">Add Product</button>
+      </form>
+    </div>
+  </div>
+
+  <hr>
+
+  <h4>Stored Product Details:</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for detail in var %}
+      <tr>
+        <td>{{ detail[0] }}</td>
+        <td>{{ detail[1] }}</td>
+        <td>{{ detail[2] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <br><br><hr>
+  <!-- Delete All Products Button -->
+  <div class="d-flex justify-content-start" style="margin-top: 20px;">
+    <form action="/delete_all" method="POST">
+        <button type="submit" class="btn btn-danger">Delete All Products</button>
+    </form>
+  </div>
+
+  <!-- Backup & Restore Buttons -->
+  <div class="d-flex justify-content-start mt-3">
+    <form action="/backup" method="GET">
+        <button type="submit" class="btn btn-warning mr-3">Backup Database</button>
+    </form>
+
+    <form action="/restore" method="GET">
+        <button type="submit" class="btn btn-danger">Restore Database</button>
+    </form>
+  </div>
+
+  
+
+</div>
+</div>
+
+
+
+</body>
+</html>
