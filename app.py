@@ -12,7 +12,6 @@ app = Flask(__name__)
 
 import rds_db as db
 import boto3
-
 app.secret_key = b'shv\x04@U\x90\xbeJf\xda\x0f\x9bF\x9aK\x1e\x831\x98\xf0\xc4$\x82'
 
 # AWS RDS Credentials
@@ -92,4 +91,4 @@ def delete_all():
     return redirect(url_for('index'))  # Refresh the page after deletion
    
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8000)
