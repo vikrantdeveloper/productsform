@@ -4,17 +4,24 @@ Created on March 16, 2025
 @author: Vikrant
 """
 import pymysql
-import aws_credentials as rds
+#import aws_credentials as rds
+
+host = "productsdb.cr2402k6ys23.eu-north-1.rds.amazonaws.com"
+port = 3306
+user = "admin"
+password = "Vikrantaws123"
+db = "test"
+
 
 def get_db_connection():
     """Establish and return a database connection."""
     try:
         return pymysql.connect(
-            host=rds.host,
-            port=rds.port,
-            user=rds.user,
-            password=rds.password,
-            db=rds.db
+            host=host,
+            port=port,
+            user=user,
+            password=password,
+            db=db
         )
     except pymysql.MySQLError as e:
         print(f"Error connecting to MySQL: {e}")
